@@ -1,0 +1,154 @@
+<div class="grid grid-cols-1 md:grid-cols-6 gap-5">
+@for(i of [1,2,3,4,5,6]; track i){
+   <app-offer-tile 
+     title="Active Offers"
+     value="7"
+    subtitle="Currently active"
+    icon="pi pi-bolt"
+    bgColor="bg-white"
+></app-offer-tile>
+}
+
+
+</div>
+<br>
+<p-table
+  [value]="offers()"
+  [rows]="10"
+  [paginator]="true"
+  [loading]="loading"
+  responsiveLayout="scroll"
+  class="shadow-sm rounded-xl overflow-hidden border border-slate-200"
+>
+
+   <!-- TABLE CAPTION -->
+    <ng-template pTemplate="caption">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-3 bg-slate-50/80" style="border-radius: 10px;">
+        <span class="text-xl font-bold">Offers</span>
+ 
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <input pInputText [(ngModel)]="searchOffer" type="text" placeholder="Search" class="w-full sm:w-auto" />
+          <p-button label="Create Offer" icon="pi pi-plus" (click)="addNewOffer()"></p-button>
+        </div>
+      </div>
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-start gap-3 p-3 bg-white">
+    
+        <div class="card flex justify-center">
+
+            <p-select [options]="locations" [(ngModel)]="selectedLocation" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
+        </div>
+    
+        <div class="card flex justify-center">
+            <p-select [options]="statuses" [(ngModel)]="selectedStatus" optionLabel="label" placeholder="Status"
+                class="filter-select" />
+        </div>
+    
+        <div class="card flex justify-center">
+            <p-select [options]="redemptions" [(ngModel)]="selectedRedemption" optionLabel="label" placeholder="Redemption"
+                class="filter-select" />
+        </div>
+    
+    </div>
+    </ng-template>
+   
+  <!-- HEADER -->
+  <ng-template pTemplate="header">
+    
+    <tr>
+      <th>Offer Title</th>
+      <th>Vendor Name</th>
+      <th>Type</th>
+      <!-- <th>Category</th> -->
+      <th>Discount Amount</th>
+      <th>Expiration Date</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+
+  <!-- BODY -->
+  <ng-template pTemplate="body" let-offer>
+    <tr >
+
+      <!-- IMAGE + TITLE -->
+      <td>
+        <div class="flex items-center gap-3">
+          <img
+            [src]="offer.image"
+            class="w-12 h-12 rounded-lg object-cover"
+          />
+          <span class="font-medium text-gray-800">
+            {{ offer.title }}
+          </span>
+        </div>
+      </td>
+
+
+         <!-- VENDOR -->
+      <td class="text-gray-600" (click)="viewOfferDetails(offer)" class="cursor-pointer">
+        {{ offer.vendor.name }}
+      </td>
+
+       <!--DISCOUNT TYPE  -->
+      <td (click)="viewOfferDetails(offer)" class="cursor-pointer">
+        <span
+          class="px-3 py-1 rounded-full text-xs font-medium"
+          [ngClass]="{
+            ' text-purple-700': offer.discountType === 'fixed',
+            ' text-orange-700': offer.discountType === 'percentage',
+          }"
+        >
+          {{ offer.discountType}}
+        </span>
+      </td>
+
+
+      <!-- DISCOUNT -->
+      <td class="font-semibold text-gray-700" (click)="viewOfferDetails(offer)" class="cursor-pointer">
+        {{ offer.discountCode}}
+      </td>
+
+      <!-- CATEGORY -->
+      <!-- <td class="text-gray-600">
+        {{ offer.category }}
+      </td> -->
+
+   
+
+      <!-- CAMPAIGN START DATE -->
+      <td class="text-gray-600" (click)="viewOfferDetails(offer)" class="cursor-pointer">
+        {{ offer.expiryDate.$date | date:'yyyy-MM-dd' }}
+      </td>
+      
+         <!--DISCOUNT TYPE  -->
+      <td (click)="viewOfferDetails(offer)" class="cursor-pointer">
+        <span
+          class="px-3 py-1 rounded-full text-xs font-medium"
+          [ngClass]="{
+            'bg-purple-100 text-purple-700': offer.offerType === 'occasional',
+            'bg-orange-100 text-orange-700': offer.offertType === 'regular',
+          }"
+        >
+          {{ offer.offerType}}
+        </span>
+      </td>
+     
+
+      <!-- STATUS TOGGLE -->
+      <td>
+        <!-- <p-inputSwitch [(ngModel)]="offer.status"></p-inputSwitch> -->
+         <div class="card flex justify-center">
+            <p-toggleswitch [(ngModel)]="offer.isActive" disabled />
+        </div>
+      </td>
+
+      <!-- ACTION BUTTONS -->
+      <td >
+        <button (click)="viewOfferDetails(offer)" pButton icon="pi pi-eye" class="p-button-text p-1 bg-[#F1F5F9;]"></button>
+      </td>
+
+    </tr>
+  </ng-template>
+
+</p-table>

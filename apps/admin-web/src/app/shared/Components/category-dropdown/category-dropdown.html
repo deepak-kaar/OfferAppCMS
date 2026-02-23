@@ -1,0 +1,23 @@
+<div class="flex flex-col gap-2">
+  <label class="text-sm font-medium">{{ label }}</label>
+  @if (multiple) {
+    <p-multiSelect
+      [options]="categories()"
+      [formControl]="control"
+      optionLabel="name"
+      optionValue="_id.$oid"
+      [placeholder]="placeholder"
+      display="chip"
+      class="w-full bg-gray-50">
+    </p-multiSelect>
+  } @else {
+    <p-select
+      [options]="categories()"
+      [formControl]="control"
+      optionLabel="name"
+      optionValue="_id.$oid"
+      [placeholder]="placeholder"
+      class="w-full bg-gray-50">
+    </p-select>
+  }
+</div>

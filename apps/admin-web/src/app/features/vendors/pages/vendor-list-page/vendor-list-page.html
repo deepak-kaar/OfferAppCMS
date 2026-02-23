@@ -1,0 +1,165 @@
+<!-- DASHBOARD TILES -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+  <app-tile [value]="vendorListData().length" label="Total Vendors" icon="pi-users" iconColor="#00632E" iconBackgroundColor="#00267833"></app-tile>
+ 
+  <app-tile value="1,842" label="Active Locations" icon="pi-map-marker" iconColor="#00632E" iconBackgroundColor="#00267833"></app-tile>
+ 
+  <app-tile value="10" label="Expired Vendors" icon="pi-users" iconColor="#00632E"></app-tile>
+ 
+  <app-tile value="1,842" label="Expiring Soon" icon="pi-map-marker" iconColor="#00632E" iconBackgroundColor="#00267833"></app-tile>
+</div>
+ 
+<br>
+ 
+<!-- TABLE WRAPPER -->
+<div class="card w-full overflow-x-auto overflow-y-auto">
+ 
+  <p-table
+    style="border:1px solid #E2E8F0; border-radius: 10px;"
+    [value]="filteredVendors"
+    [loading]="isLoading()"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    class="min-w-full shadow-[0_4px_6px_-4px_rgba(0,0,0,0.1),0_10px_15px_-3px_rgba(0,0,0,0.1)]">
+ 
+    <!-- TABLE CAPTION -->
+    <ng-template pTemplate="caption">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-3 bg-slate-50/80" style="border-radius: 10px;">
+        <span class="text-xl font-bold">Vendors</span>
+ 
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <input
+            pInputText
+            [(ngModel)]="searchQuery"
+            type="text"
+            placeholder="Search by name, contact, offers, locations, status, date..."
+            class="w-full sm:w-auto min-w-[200px]"
+          />
+          <p-button label="Add Vendor" icon="pi pi-plus" (click)="AddNewVendor()"></p-button>
+        </div>
+      </div>
+    </ng-template>
+ 
+    <!-- TABLE HEADER -->
+    <ng-template pTemplate="header">
+      <tr class="bg-slate-50/80">
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Vendor Name</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Contact</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Offers</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Locations</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Status</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide">Registration Date</th>
+        <th class="text-sm text-gray-500 uppercase tracking-wide text-right">Actions</th>
+      </tr>
+    </ng-template>
+ 
+    <!-- TABLE BODY -->
+    <ng-template pTemplate="body" let-vendor>
+      <tr (click)="navigateVendorDetails(vendor)" class="cursor-pointer" >
+        <td class="flex items-center gap-3">
+          <img
+            [src]="vendor.logo || 'assets/images/Container.png'"
+            (error)="$any($event.target).src='assets/images/Container.png'"
+            alt="{{ vendor.name }}"
+            class="w-12 h-12 rounded object-cover" />
+          {{ vendor.name }}
+        </td>
+ 
+        <td>{{ vendor.email }}</td>
+        <td>{{ vendor.offers ? vendor.offers.length : 0 }}</td>
+        <td>{{ vendor.locations ? vendor.locations.length : 0 }}</td>
+  <!-- [style]="vendor.isActive ? 'background-color: rgba(0, 132, 61, 0.2); color: green;' : 'background-color:rgb(255, 229, 181); color: orange;'" -->
+        <td>
+          <p-tag
+            [value]="vendor.isActive ? 'active' : 'in-active'"
+            class="uppercase"
+           
+            [severity]="vendor.isActive ? 'success' : 'warn'">
+          </p-tag>
+        </td>
+ 
+        <td>{{ formatdate(vendor.createdAt.$date) }}</td>
+        <td class="text-right" (click)="$event.stopPropagation()">
+          <div class="flex items-center justify-end gap-2">
+            <p-button
+              icon="pi pi-power-off"
+              [rounded]="true"
+              [text]="true"
+              severity="secondary"
+              pTooltip="Deactivate"
+              (onClick)="deactivateVendor(vendor, $event)"
+              [disabled]="!vendor.isActive">
+            </p-button>
+            <p-button
+              icon="pi pi-trash"
+              [rounded]="true"
+              [text]="true"
+              severity="danger"
+              pTooltip="Delete"
+              (onClick)="deleteVendor(vendor, $event)">
+            </p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+     <ng-template pTemplate="loading">
+  <tbody>
+    @for (i of [1,2,3,4,5]; track i) {
+      <tr class="border-b border-gray-200 last:border-none">
+
+        <!-- Avatar + Name -->
+        <td class="py-4 px-3">
+          <div class="flex items-center gap-3">
+            <p-skeleton shape="circle" size="2.8rem"></p-skeleton>
+
+            <div class="flex flex-col gap-2">
+              <p-skeleton width="7rem" height="0.8rem"></p-skeleton>
+              <p-skeleton width="5rem" height="0.8rem"></p-skeleton>
+            </div>
+          </div>
+        </td>
+
+        <!-- Email -->
+        <td class="py-4 px-3">
+          <p-skeleton width="10rem" height="0.8rem"></p-skeleton>
+        </td>
+
+        <!-- Phone -->
+        <td class="py-4 px-3">
+          <p-skeleton width="6rem" height="0.8rem"></p-skeleton>
+        </td>
+
+        <!-- Status -->
+        <td class="py-4 px-3">
+          <p-skeleton width="5rem" height="1.2rem" styleClass="rounded-full"></p-skeleton>
+        </td>
+
+        <!-- Created Date -->
+        <td class="py-4 px-3">
+          <p-skeleton width="7rem" height="0.8rem"></p-skeleton>
+        </td>
+
+        <!-- Actions -->
+        <td class="py-4 px-3">
+          <div class="flex gap-2">
+            <p-skeleton width="2rem" height="2rem" shape="circle"></p-skeleton>
+            <p-skeleton width="2rem" height="2rem" shape="circle"></p-skeleton>
+            <p-skeleton width="2rem" height="2rem" shape="circle"></p-skeleton>
+          </div>
+        </td>
+
+      </tr>
+    }
+  </tbody>
+</ng-template>
+
+ 
+  </p-table>
+
+</div>
+
+<p-toast />
+<p-confirmdialog />
+

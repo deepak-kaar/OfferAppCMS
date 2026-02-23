@@ -1,0 +1,57 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.mjs"
+    ],
+    "sharedGlobals": []
+  },
+  "targetDefaults": {
+    "@angular/build:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps",
+        "serveStaticTargetName": "serve-static"
+      }
+    }
+  ],
+  "depConstraints": [
+    {
+      "sourceTag": "scope:admin",
+      "onlyDependOnLibsWithTags": ["scope:admin", "scope:shared"]
+    },
+    {
+      "sourceTag": "scope:vendor",
+      "onlyDependOnLibsWithTags": ["scope:vendor", "scope:shared"]
+    },
+    {
+      "sourceTag": "scope:user",
+      "onlyDependOnLibsWithTags": ["scope:user", "scope:shared"]
+    }
+  ],
+  "generators": {
+    "@nx/angular:component": {
+      "style": "css"
+    },
+    "@nx/angular:route": {}
+  }
+}

@@ -1,0 +1,9 @@
+.active-link {
+   background: linear-gradient(93.08deg, #633378 10%, #F05F40 90%);
+   color:white;
+}
+
+.active-link .left-bar {
+  opacity: 1;
+  background: linear-gradient(to bottom, #633378, #F05F40);
+}

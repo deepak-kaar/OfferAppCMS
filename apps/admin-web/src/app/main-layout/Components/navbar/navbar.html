@@ -1,0 +1,17 @@
+ <p-toolbar class="bg-white h-5xl p-4">
+                <ng-template #start>
+                    <h3 class="text-black text-1xl font-medium">{{ headerData}}</h3>
+                </ng-template>
+                <ng-template #center>
+
+                </ng-template>
+                <ng-template #end>
+                    <p-overlay-badge value="4" severity="danger" class="inline-flex">
+                        <p-avatar icon="pi pi-user" />
+                    </p-overlay-badge>
+                    &nbsp;
+                    &nbsp;
+                    <p-avatar class="mr-2" image="https://primefaces.org/cdn/primeng/images/demo/avatar/walter.jpg"
+                        style="background-color: #ece9fc; color: #2a1261" />
+                </ng-template>
+            </p-toolbar>

@@ -1,0 +1,242 @@
+<div class="w-full flex flex-row gap-3 items-center mb-5">
+    <i class="pi pi-arrow-left text-sm text-[#45556C] cursor-pointer" (click)="goBack()"></i>
+    <p class="text-[#45556C] text-md font-normal">Back to Vendors</p>
+</div>
+@if (isLoading()) {
+   <!-- SKELETON FOR MAIN VENDOR HEADER CARD -->
+<p-card class="shadow-[0px_8px_10px_-6px_#0000001A] rounded-xl">
+  <div class="flex flex-wrap md:flex-nowrap items-center gap-5">
+
+    <!-- LEFT IMAGE BOX -->
+    <div class="w-32 h-32 md:w-40 md:h-40 bg-gray-300 rounded-lg animate-pulse"></div>
+
+    <!-- CENTER CONTENT -->
+    <div class="flex flex-col flex-grow gap-4">
+
+      <!-- NAME + STATUS -->
+      <div class="flex items-center gap-3">
+        <div class="h-8 w-48 bg-gray-300 rounded animate-pulse"></div>
+        <div class="h-6 w-20 bg-gray-300 rounded-full animate-pulse"></div>
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="h-4 w-full bg-gray-300 rounded animate-pulse"></div>
+      <div class="h-4 w-3/4 bg-gray-300 rounded animate-pulse"></div>
+
+      <!-- CONTACT ROW -->
+      <div class="flex flex-row flex-wrap gap-5 mt-2">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+          <div class="h-4 w-32 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+          <div class="h-4 w-32 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+          <div class="h-4 w-32 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+          <div class="h-4 w-32 bg-gray-300 rounded animate-pulse"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT ACTION BUTTONS -->
+    <div class="flex flex-col gap-3 flex-shrink-0">
+
+      <div class="h-10 w-32 bg-gray-300 rounded-lg animate-pulse"></div>
+      <div class="h-10 w-32 bg-gray-300 rounded-lg animate-pulse"></div>
+
+      <div class="flex gap-3">
+        <div class="h-10 w-24 bg-gray-300 rounded-lg animate-pulse"></div>
+        <div class="h-10 w-10 bg-gray-300 rounded-lg animate-pulse"></div>
+      </div>
+
+    </div>
+
+  </div>
+</p-card>
+
+<br>
+
+<!-- SKELETON FOR REPRESENTATIVE INFO -->
+<p-card class="shadow-[0px_8px_10px_-6px_#0000001A] rounded-xl">
+  <div class="flex flex-row flex-wrap gap-5">
+
+    <div class="flex items-center gap-3">
+      <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+      <div class="h-4 w-40 bg-gray-300 rounded animate-pulse"></div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+      <div class="h-4 w-40 bg-gray-300 rounded animate-pulse"></div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <div class="h-8 w-8 bg-gray-300 rounded-lg animate-pulse"></div>
+      <div class="h-4 w-40 bg-gray-300 rounded animate-pulse"></div>
+    </div>
+
+  </div>
+</p-card>
+} @else {
+    
+<p-card class="shadow-[0px_8px_10px_-6px_#0000001A] 
+             bg-[linear-gradient(91.48deg,#633378_10%,#F05F40_90%)] 
+            rounded-xl">
+
+    <div class="flex flex-wrap md:flex-nowrap items-center gap-5">
+
+        <!-- LEFT BOX (fixed size) -->
+        <div class="w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
+            <img class="rounded-lg object-cover w-full h-full"
+                [src]="vendorDetails().logo || 'assets/images/VendorDetailImg.png'"
+                [alt]="vendorDetails().name + ' logo'"
+                (error)="$event.target.src='assets/images/VendorDetailImg.png'" />
+        </div>
+        <!-- CENTER BOX (flex-grow) -->
+        <div class="flex flex-col flex-grow text-white gap-3">
+
+            <div class="flex justify-start items-center gap-3">
+                <h2 class="text-4xl md:text-4xl font-normal">{{vendorDetails().name}}</h2>
+                <p-tag [severity]="vendorDetails().isActive ? 'success' : 'warn'"
+                    [value]="vendorDetails().isActive ? 'Active' : 'In-Active'"
+                    [rounded]="true"></p-tag>
+            </div>
+
+            <div class="flex flex-wrap text-sm">
+                <p>{{vendorDetails().description}}</p>
+            </div>
+
+            <div class="flex flex-row flex-wrap gap-5">
+                <div class="flex gap-3 justify-start items-center ">
+                    <p-avatar icon="pi pi-envelope" class="bg-[#FFFFFF33] text-white rounded-lg p-2" size="normal" />
+                    <p class="text-white text-md">{{vendorDetails().email}}</p>
+                </div>
+                <div class="flex gap-3 justify-start items-center ">
+                    <p-avatar icon="pi pi-phone" class="bg-[#FFFFFF33] text-white rounded-lg p-2" size="normal" />
+                    <p class="text-white text-md">{{vendorDetails().mobile}}</p>
+                </div>
+                <div class="flex gap-3 justify-start items-center ">
+                    <p-avatar icon="pi pi-globe" class="bg-[#FFFFFF33] text-white rounded-lg p-2" size="normal" />
+                    <p class="text-white text-md">{{vendorDetails().website}}</p>
+                </div>
+                <div class="flex gap-3 justify-start items-center ">
+                    @for(logo of vendorDetails().links; track logo){
+                    <p-avatar icon="pi pi-envelope" class="bg-[#FFFFFF33] text-white rounded-lg p-2" size="normal" />
+                    }
+                    
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT BOX (fixed size) -->
+        <div class="flex flex-shrink-0 flex-col h-fit flex-col gap-3 text-md font-normal">
+            <div pRipple class="inline-flex justify-start items-center  cursor-pointer 
+                            bg-[#FFFFFF33] rounded-lg w-32 ripple-box overflow-hidden w-50"
+                (click)="editVendorDetailsById()">
+                <p-tag icon="pi pi-pencil" value="Edit Vendor"
+                    class="text-white bg-transparent border-none p-2 ml-2 text-md font-normal"></p-tag>
+            </div>
+            <div pRipple class="inline-flex justify-start items-center  cursor-pointer 
+                            bg-[#FFFFFF33] rounded-lg w-32 ripple-box overflow-hidden w-50">
+                <p-tag icon="pi pi-ticket" value="Raise Ticket"
+                    class="text-white bg-transparent border-none p-2 ml-2 text-md font-normal"></p-tag>
+            </div>
+            <div class="flex flex-row gap-3">
+                @if (vendorDetails().isActive) {
+                    <div pRipple class="inline-flex justify-start items-center cursor-pointer
+                                                bg-[#FFFFFF33] rounded-lg ripple-box overflow-hidden"
+                        (click)="deactivateVendorById()">
+                        <p-tag icon="pi pi-power-off" value="Deactivate"
+                            class="text-white bg-transparent border-none p-2 ml-2 text-md font-normal"></p-tag>
+                    </div>
+                } @else {
+                    <div pRipple class="inline-flex justify-start items-center cursor-pointer
+                                                bg-[#FFFFFF33] rounded-lg ripple-box overflow-hidden"
+                        (click)="activateVendorById()">
+                        <p-tag icon="pi pi-check-circle" value="Activate"
+                            class="text-white bg-transparent border-none p-2 ml-2 text-md font-normal"></p-tag>
+                    </div>
+                }
+                <div pRipple class="flex items-center justify-center cursor-pointer
+                                                bg-[#FFFFFF33] rounded-lg ripple-box overflow-hidden"
+                    (click)="deleteVendorById()">
+                    <p-tag icon="pi pi-trash" class="text-white bg-transparent border-none"></p-tag>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</p-card>
+<br>
+<p-card class="shadow-[0px_8px_10px_-6px_#0000001A] rounded-xl" header="Representative Info">
+    <div class="flex flex-row flex-wrap gap-5">
+        <div class="flex gap-3 justify-start items-center ">
+            <p-avatar icon="pi pi-envelope" class="bg-[#E1D2E6] text-[#643278] rounded-lg p-2" size="normal" />
+            <p class="text-black text-md">{{vendorDetails().smeEmail}}</p>
+        </div>
+        <div class="flex gap-3 justify-start items-center ">
+            <p-avatar icon="pi pi-phone" class="bg-[#E1D2E6] text-[#643278] rounded-lg p-2" size="normal" />
+            <p class="text-black text-md">{{vendorDetails().smePhone}}</p>
+        </div>
+        <div class="flex gap-3 justify-start items-center ">
+            <p-avatar icon="pi pi-globe" class="bg-[#E1D2E6] text-[#643278] rounded-lg p-2" size="normal" />
+            <p class="text-black text-md">{{vendorDetails().smeName}}</p>
+        </div>
+
+    </div>
+</p-card>
+}
+
+<br>
+<div class="card">
+    <p-tabs lazy value="0">
+        <p-tablist>
+            <p-tab value="0">H</p-tab>
+            <p-tab value="1">Header II</p-tab>
+            <p-tab value="2">Header III</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+                <p class="m-0">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit anim id est
+                    laborum.
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+                <p class="m-0">
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo
+                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                    dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
+                    eius modi.
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="2">
+                <ng-template #content>Complex components that should only be initialized when the tab becomes
+                    active</ng-template>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+</div>
+
+
+<p-toast />
+<p-confirmdialog />

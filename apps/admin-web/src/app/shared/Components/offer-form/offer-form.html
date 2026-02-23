@@ -1,0 +1,427 @@
+
+
+<form [formGroup]="offerForm" (ngSubmit)="submit()">
+     <div class="w-full flex flex-col md:flex-row justify-between items-center mb-5">
+
+  <!-- Left Section -->
+  <div class="flex flex-row gap-3 items-center mb-5 md:mb-0">
+    <i class="pi pi-arrow-left text-sm text-[#45556C] cursor-pointer" (click)="back()"></i>
+    <p class="text-[#45556C] text-md font-normal" (click)="back()">Cancel</p>
+  </div>
+
+  <!-- Right Section -->
+  <div class="flex flex-row gap-3  mb-5 md:mb-0">
+    <button pButton type="button" label="Back to Vendors" class="p-button-outlined" (click)="back()"></button>
+    <button pButton type="submit" [label]="buttonName" class="p-button-primary"></button>
+  </div>
+
+</div>
+    <div class="p-6 bg-white rounded-xl shadow-sm space-y-6 shadow-[0_4px_6px_-4px_#0000001A]
+">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div class="md:col-span-2">
+                <label class="text-sm font-medium">Select the vendor</label>
+
+                <div class="card flex justify-center">
+                    <p-select [options]="vendors()" formControlName="selectedVendor" optionLabel="name"
+                        optionValue="_id.$oid" placeholder="Choose an approved vendor" class="pl-5 w-full bg-gray-50">
+                    </p-select>
+
+                </div>
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Offer Title </label>
+                <div class="relative">
+                    <input pInputText formControlName="titleEn" class="w-full  pl-5 bg-gray-50" />
+                </div>
+            </div>
+
+            <div>
+                <label class="text-sm font-medium">Offer Title in Arabic</label>
+                <div class="relative">
+                    <input pInputText formControlName="titleAr" class="w-full text-right pr-2 bg-gray-50" />
+                </div>
+            </div>
+
+            <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- HOTEL STAR RATING -->
+                <div class="flex flex-col gap-4 ">
+                    <label class="font-semibold text-gray-800">Discount Type</label>
+
+                    <div class="flex items-center gap-10">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="hotelRating" value="Fixed" formControlName="discountType">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Fixed</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="hotelRating" value="Percentage" formControlName="discountType">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Percentage</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="hotelRating" value="Others" formControlName="discountType">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Others</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- DISCOUNT ENGLISH -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-medium text-gray-700">
+                        Discount Amount 
+                    </label>
+                    <input pInputText formControlName="discountEn" class="w-full pl-5 bg-gray-50" />
+                </div>
+
+                <!-- DISCOUNT ARABIC -->
+                <div class="flex flex-col gap-3">
+                    <label class="text-sm font-medium text-gray-700">
+                        Discount Amount in Arabic
+                    </label>
+                    <input pInputText formControlName="discountAr" class="w-full pr-5 text-right bg-gray-50" />
+                </div>
+
+            </div>
+
+
+
+
+
+            <div class="flex-auto">
+                <label for="icondisplay" class="text-sm font-medium"> Start Date</label>
+                <p-datepicker formControlName="startdate" iconDisplay="input"  [minDate]="minDate"
+ showIcon="true" inputId="icondisplay"
+                    class="w-full  bg-gray-50" variant="filled" />
+            </div>
+
+
+            <div class="flex-auto">
+                <label for="icondisplay" class="text-sm font-medium"> Expire Date</label>
+                <p-datepicker formControlName="expiry" iconDisplay="input" showIcon="true" inputId="icondisplay"
+                    class="w-full  bg-gray-50" variant="filled" />
+            </div>
+
+            <div>
+                <app-category-dropdown
+                    [label]="'Select the Category'"
+                    [placeholder]="'Select categories'"
+                    [multiple]="true"
+                    [required]="true"
+                    [control]="category">
+                </app-category-dropdown>
+            </div>
+
+            <!-- <div>
+                <label class="text-sm font-medium">tags</label>
+                <div class="relative">
+                    <input pInputText formControlName="tagInput" class="w-full  pl-5 bg-gray-50" />
+                </div>
+                <div formArrayName="selectedTags" class="pt-2 flex gap-3">
+                    @for(item of selectedTags.controls;track item){
+                    <p-chip [label]="item.value" [removable]="true" />
+                    }
+                </div>
+            </div> -->
+
+            <div class="row-span-2">
+                <label class="text-sm font-medium">Tags</label>
+                <div class="flex items-center gap-3">
+                    <div class="relative flex-1">
+                        <!-- <i class="pi pi-link absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i> -->
+                        <input formControlName="tagInput" pInputText class="pl-5 w-full bg-gray-50"
+                            placeholder="Search or Create Tags" />
+                    </div>
+                    <p-button icon="pi pi-plus" (click)="addTag()"></p-button>
+                </div>
+                <div formArrayName="selectedTags" class="pt-2 flex gap-3">
+                    @for(item of selectedTags.controls;track item){
+                    <p-chip [label]="item.value" [removable]="true" />
+                    }
+                </div>
+            </div>
+
+
+            <div class="md:col-span-2">
+                <h2 class="text-sm font-medium mb-5">REDEMPTION INSTRUCTION</h2>
+                <label class="text-sm font-medium">Instructions</label>
+                <textarea pInputTextarea formControlName="instructionsEn" rows="4" class="w-full bg-gray-50"></textarea>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="text-sm font-medium">Instructions in Arabic</label>
+                <textarea pInputTextarea formControlName="instructionsAr" rows="4" class="w-full bg-gray-50"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
+
+                <!-- HOTEL STAR RATING -->
+
+
+                <!-- OFFER LOCATION -->
+                <div class="flex flex-col gap-4 flex-nowrap ">
+                    <label class="text-sm font-medium">Offer</label>
+
+                    <div class="flex items-center gap-10 flex-wrap">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="offerLocation" value="store" formControlName="mode">
+                            </p-radiobutton>
+                            <span class="text-gray-700">In store</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="offerLocation" value="online" formControlName="mode">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Online</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="offerLocation" value="both" formControlName="mode">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Both</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- OFFER TYPE -->
+                <div class="flex flex-col gap-4 md:mt-0 mt-6">
+                    <label class="text-sm font-medium">Offer Type</label>
+
+                    <div class="flex items-center gap-10">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="offerType" value="regular" formControlName="offerType">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Regular</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <p-radiobutton name="offerType" value="occasional" formControlName="offerType">
+                            </p-radiobutton>
+                            <span class="text-gray-700">Occasional</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="text-sm font-medium">Locations</label>
+                <div
+                    class="flex flex-col gap-4 p-5 border rounded-xl bg-white justify-center items-center border-gray-300 ">
+
+                    <!-- Title -->
+                    <!-- <label class="font-semibold text-gray-900 text-lg">Locations</label> -->
+                    <i class="pi pi-map-marker text-gray-600 text-xl"></i>
+                    <!-- Empty State Message -->
+                    <p class="text-gray-500 text-sm">
+                        Select a vendor above to view available locations
+                    </p>
+
+                    <!-- Add Location Button -->
+                    <p-button label="Primary" variant="outlined" type="button" label="Add Location" icon="pi pi-plus"
+                        class="w-fit px-4 py-2 text-sm font-medium">
+                    </p-button>
+
+                </div>
+            </div>
+
+            <div class="md:col-span-2">
+                <label class="text-sm font-medium">Upload Image</label>
+                <div
+                    class="border-2 border-dashed border-gray-300 rounded-xl p-8 bg-gray-50 text-center cursor-pointer"
+                    (dragover)="onOfferDragOver($event)"
+                    (dragleave)="onOfferDragLeave($event)"
+                    (drop)="onOfferDrop($event)"
+                    [class.border-blue-400]="isDragging">
+
+                    @if (offerImagePreviewUrl(); as preview) {
+                        <div class="flex flex-col items-center gap-3">
+                            <img [src]="preview" alt="Offer image preview" class="max-h-40 w-auto object-contain rounded-lg shadow-sm" />
+                            <p class="text-gray-500 text-sm">{{ selectedOfferFile()?.name }}</p>
+                            <div class="flex gap-2">
+                                <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                                    (click)="offerFileInput.click(); $event.stopPropagation()"></button>
+                                <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                                    (click)="removeOfferImage(); $event.stopPropagation()"></button>
+                            </div>
+                        </div>
+                    } @else if (offerForm.get('offerImage')?.value && typeof offerForm.get('offerImage')?.value === 'string') {
+                        <div class="flex flex-col items-center gap-3">
+                            <img [src]="offerForm.get('offerImage')?.value" alt="Offer image" class="max-h-40 w-auto object-contain rounded-lg shadow-sm"
+                                (error)="$any($event.target).style.display='none'" />
+                            <p class="text-gray-500 text-sm">Current image</p>
+                            <div class="flex gap-2">
+                                <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                                    (click)="offerFileInput.click(); $event.stopPropagation()"></button>
+                                <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                                    (click)="removeOfferImage(); $event.stopPropagation()"></button>
+                            </div>
+                        </div>
+                    } @else {
+                        <div class="flex flex-col items-center gap-3" (click)="offerFileInput.click()">
+                            <i class="pi pi-upload text-4xl text-gray-400"></i>
+                            <p class="text-gray-600 font-medium">Upload a file or drag and drop</p>
+                            <p class="text-gray-400 text-sm">PNG, JPG, GIF up to 2MB</p>
+                        </div>
+                    }
+
+                    <input #offerFileInput type="file" accept="image/*" class="hidden" (change)="onOfferFileSelected($event)" />
+                </div>
+            </div>
+
+            <div class="md:col-span-2 flex flex-col gap-5">
+                <!-- Section Title -->
+                <p class="text-lg font-semibold text-gray-900">Contact Information</p>
+                <!-- Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- PHONE NUMBER -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium">
+                            PHONE NUMBER
+                        </label>
+                        <input pInputText formControlName="phone" placeholder="+966 5 1234 5678"
+                            class="pl-5 w-full bg-gray-50" />
+                    </div>
+
+                    <!-- EMAIL ADDRESS -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium">
+                            EMAIL ADDRESS
+                        </label>
+                        <input pInputText formControlName="email" placeholder="contact@example.com"
+                            class="pl-5 w-full bg-gray-50" />
+                    </div>
+
+                    <!-- LANDLINE NUMBER -->
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-medium">
+                            LANDLINE NUMBER
+                        </label>
+                        <input pInputText formControlName="landline" placeholder="+966 11 1234 5678"
+                            class="pl-5 w-full bg-gray-50" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="md:col-span-2">
+
+                <!-- OUTER WRAPPER -->
+                <div class="flex flex-col gap-6 p-5 border rounded-xl bg-[#0026781A] border-[#002678]">
+
+                    <!-- HEADER -->
+                    <div class="flex flex-row gap-4 justify-between items-center">
+                        <div class="flex flex-row gap-5">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-100">
+                                <i class="pi pi-chart-bar text-2xl text-[#002678]"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900">Highlights</h3>
+                                <p class="text-gray-500 text-sm leading-relaxed">
+                                    Add details to the Highlights section on the main page for premium visibility
+                                </p>
+                            </div>
+                        </div>
+
+                        <p-toggleswitch formControlName="highlight"></p-toggleswitch>
+                    </div>
+
+                    <!-- CONDITIONAL FORM INSIDE SAME BOX -->
+                    @if (offerForm.get('highlight')?.value) {
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6
+         transition-all duration-500 ease-in-out
+         opacity-100 translate-y-0 max-h-[2000px] overflow-hidden">
+
+                        <!-- Upload Image (Left Column) - same UI as vendor form -->
+                        <div class="flex flex-col gap-3 md:col-span-1">
+                            <label class="font-semibold text-gray-800">Upload Image</label>
+                            <div
+                                class="border-2 border-dashed border-gray-300 rounded-xl p-6 bg-gray-50 text-center cursor-pointer"
+                                (dragover)="onHighlightDragOver($event)"
+                                (dragleave)="onHighlightDragLeave($event)"
+                                (drop)="onHighlightDrop($event)"
+                                [class.border-blue-400]="isDraggingHighlight">
+
+                                @if (highlightPreviewUrl(); as preview) {
+                                    <div class="flex flex-col items-center gap-3">
+                                        <img [src]="preview" alt="Highlight preview" class="max-h-32 w-auto object-contain rounded-lg shadow-sm" />
+                                        <p class="text-gray-500 text-sm">{{ selectedHighlightFile()?.name }}</p>
+                                        <div class="flex gap-2">
+                                            <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                                                (click)="highlightFileInput.click(); $event.stopPropagation()"></button>
+                                            <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                                                (click)="removeHighlightImage(); $event.stopPropagation()"></button>
+                                        </div>
+                                    </div>
+                                } @else if (offerForm.get('highlightImage')?.value && typeof offerForm.get('highlightImage')?.value === 'string') {
+                                    <div class="flex flex-col items-center gap-3">
+                                        <img [src]="offerForm.get('highlightImage')?.value" alt="Highlight image" class="max-h-32 w-auto object-contain rounded-lg shadow-sm"
+                                            (error)="$any($event.target).style.display='none'" />
+                                        <p class="text-gray-500 text-sm">Current image</p>
+                                        <div class="flex gap-2">
+                                            <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                                                (click)="highlightFileInput.click(); $event.stopPropagation()"></button>
+                                            <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                                                (click)="removeHighlightImage(); $event.stopPropagation()"></button>
+                                        </div>
+                                    </div>
+                                } @else {
+                                    <div class="flex flex-col items-center gap-3" (click)="highlightFileInput.click()">
+                                        <i class="pi pi-upload text-4xl text-gray-400"></i>
+                                        <p class="text-gray-600 font-medium">Upload a file or drag and drop</p>
+                                        <p class="text-gray-400 text-sm">PNG, JPG, GIF</p>
+                                    </div>
+                                }
+
+                                <input #highlightFileInput type="file" accept="image/*" class="hidden" (change)="onHighlightFileSelected($event)" />
+                            </div>
+                        </div>
+
+                        <!-- Right Side Inputs -->
+                        <div class="flex flex-col gap-2 md:col-span-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium">Highlights Title (English)</label>
+                                    <input pInputText formControlName="highlightTitleEn"
+                                        class="pl-5 w-full bg-gray-50 rounded" />
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-sm font-medium">Highlights Title (Arabic)</label>
+                                    <input pInputText formControlName="highlightTitleAr"
+                                        class="w-full bg-gray-50 p-5 rounded text-right" />
+                                </div>
+
+                            </div>
+
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-medium">Highlights Description</label>
+                                <input pInputText rows="4" formControlName="highlightDescription"
+                                    class="w-full bg-gray-50 p-5 rounded" />
+                            </div>
+                        </div>
+
+                    </div>
+                    }
+
+                    @else {
+                    <div class="transition-all duration-500 ease-in-out
+         opacity-0 translate-y-4 max-h-0 overflow-hidden">
+                    </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+   
+</form>

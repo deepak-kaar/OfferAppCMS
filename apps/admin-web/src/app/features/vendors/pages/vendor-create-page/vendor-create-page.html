@@ -1,0 +1,12 @@
+
+<div class="w-full flex flex-row gap-3 items-center mb-5">
+   <i class="pi pi-arrow-left text-sm text-[#45556C] cursor-pointer" (click)="goBack()"></i>
+   <p class="text-[#45556C] text-md font-normal">Back to Vendors</p>
+</div>
+<app-vendor-form (submitFormEvent)="handleVendorSubmit($event)" buttonName="Create Vendor" actionType="new" [isLoading]="isLoading"></app-vendor-form>
+<div class="card flex justify-center gap-2">
+   <p-toast />
+   <p-confirmdialog />
+   <!-- <p-button (click)="confirm1($event)" label="Save" [outlined]="true" /> -->
+   <!-- <p-button (click)="confirm2($event)" label="Delete" severity="danger" [outlined]="true" /> -->
+</div>

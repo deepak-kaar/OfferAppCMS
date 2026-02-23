@@ -1,0 +1,10 @@
+:host ::ng-deep .filter-select .p-select {
+  width: auto !important;
+  min-width: 0 !important;
+  display: inline-flex !important;
+}
+
+:host ::ng-deep .filter-select .p-select-label {
+  padding-right: 1.5rem; /* space for arrow */
+  white-space: nowrap;   /* prevent wrapping */
+}

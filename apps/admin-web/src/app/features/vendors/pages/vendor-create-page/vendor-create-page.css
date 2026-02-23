@@ -1,0 +1,48 @@
+.custom-upload .p-fileupload {
+  border: 2px dashed #d1d5db; /* Tailwind gray-300 */
+  border-radius: 12px;
+  padding: 2rem;
+  background: #f9fafb; /* Tailwind gray-50 */
+  text-align: center;
+ 
+}
+ 
+.custom-upload .p-fileupload-buttonbar {
+  display: none; /* hide default buttons */
+}
+ 
+.custom-upload .p-fileupload-content {
+  border: none !important;
+  padding: 0;
+}
+ 
+.custom-upload .p-fileupload-content::before {
+  content: "Upload a file or drag and drop";
+  display: block;
+  font-size: 1rem;
+  color: #6b7280; /* gray-500 */
+  margin-bottom: 0.5rem;
+}
+ 
+.custom-upload .p-fileupload-content::after {
+  content: "PNG, JPG, GIF up to 10MB";
+  display: block;
+  font-size: 0.875rem;
+  color: #9ca3af; /* gray-400 */
+}
+ 
+
+/* Remove default PrimeNG button look */
+.custom-upload .p-button {
+  background: transparent !important;
+  border: 1px solid #d1d5db !important; /* gray-300 */
+  color: #374151 !important; /* gray-700 */
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 8px !important;
+}
+
+/* Remove default fileupload borders */
+.p-fileupload-content,
+.p-fileupload-buttonbar {
+  display: none !important;
+}

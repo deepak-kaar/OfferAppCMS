@@ -1,0 +1,26 @@
+<main class="w-screen h-screen"
+    style="background: linear-gradient(135deg, #F8FAFC 0%, rgba(245, 243, 255, 0.3) 50%, rgba(239, 246, 255, 0.4) 100%);">
+    <div class="grid h-full w-full p-5 gap-4
+           grid-cols-1
+           md:grid-cols-[15%_85%]
+           lg:grid-cols-[15%_85%]">
+        <!-- Sidebar -->
+        <app-sidenav class="h-full sm:hide" (sendNavBarHeader)="handledata($event)"></app-sidenav>
+
+        <div class="w-full h-auto flex flex-col"
+            style="background: linear-gradient(135deg, #F8FAFC 0%, rgba(245, 243, 255, 0.3) 50%, rgba(239, 246, 255, 0.4) 100%);">
+
+            <!-- Navbar (auto height) -->
+            <app-navbar [headerData]="receivedHeaderData"></app-navbar>
+
+            <!-- Scrollable content -->
+            <div style="height:90vh;" class="main-layout  overflow-y-auto p-4">
+                <router-outlet />
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<p-toast></p-toast>
+

@@ -1,0 +1,42 @@
+   <p-card class="bg-white p-2 h-full">
+            <div class="flex flex-row justify-start items-center">
+                <p-avatar  class="mr-2" size="large"
+                    style="background:linear-gradient(93.08deg, #633378 10%, #F05F40 90%); color: #2a1261" >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M19.9934 7.99736H3.99869C3.44659 7.99736 2.99902 8.44493 2.99902 8.99703V10.9964C2.99902 11.5485 3.44659 11.996 3.99869 11.996H19.9934C20.5455 11.996 20.9931 11.5485 20.9931 10.9964V8.99703C20.9931 8.44493 20.5455 7.99736 19.9934 7.99736Z"
+                                stroke="white" stroke-width="1.99934" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M11.9961 7.99736V20.9931" stroke="white" stroke-width="1.99934" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path
+                                d="M18.9939 11.996V18.9937C18.9939 19.524 18.7833 20.0325 18.4083 20.4075C18.0334 20.7824 17.5248 20.9931 16.9946 20.9931H6.99788C6.46762 20.9931 5.95908 20.7824 5.58413 20.4075C5.20918 20.0325 4.99854 19.524 4.99854 18.9937V11.996"
+                                stroke="white" stroke-width="1.99934" stroke-linecap="round" stroke-linejoin="round" />
+                            <path
+                                d="M7.49771 7.99736C6.83489 7.99736 6.19921 7.73406 5.73053 7.26537C5.26184 6.79668 4.99854 6.16101 4.99854 5.49819C4.99854 4.83536 5.26184 4.19969 5.73053 3.731C6.19921 3.26232 6.83489 2.99901 7.49771 2.99901C8.46208 2.98221 9.40711 3.45012 10.2096 4.34173C11.012 5.23333 11.6346 6.50726 11.9962 7.99736C12.3578 6.50726 12.9805 5.23333 13.7829 4.34173C14.5853 3.45012 15.5304 2.98221 16.4947 2.99901C17.1576 2.99901 17.7932 3.26232 18.2619 3.731C18.7306 4.19969 18.9939 4.83536 18.9939 5.49819C18.9939 6.16101 18.7306 6.79668 18.2619 7.26537C17.7932 7.73406 17.1576 7.99736 16.4947 7.99736"
+                                stroke="white" stroke-width="1.99934" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+
+                    </p-avatar>
+                <div class="flex flex-col justify-start items-center">
+                    <h2 class="text-black text-1xl font-medium">Offer Admin</h2>
+                    <p class="text-grey text-sm font-normal">control portal</p>
+                </div>
+            </div>
+            <div class="container mt-10">
+                <ul class="list-none p-0 m-0 overflow-visible">
+                    @for(item of navItems(); track item;){
+                    <li routerLink="/{{ item.navLink }}" routerLinkActive="active-link"
+                        class="relative flex items-center rounded-xl hover:bg-gray-50 cursor-pointer" (click)="navigate(item)">
+                        <!-- LEFT BAR -->
+                        <div class="left-bar absolute left-[-30px] top-0 h-full w-1 rounded-r opacity-0 " ></div>
+                    
+                        <!-- MENU CONTENT -->
+                        <a pRipple class="flex items-center gap-3 p-3 w-full">
+                            <i [class]="item.icon" class="p-2"></i>
+                            <span class="font-medium">{{ item.navItem }}</span>
+                        </a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </p-card>

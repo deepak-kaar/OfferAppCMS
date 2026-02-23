@@ -1,0 +1,6 @@
+
+@if(!isLoading()){
+<app-offer-form (submitOfferFormEvent)="handleOfferSubmit($event)" buttonName="Save Offer" actionType="edit" [isLoading]="isLoading()"  [editableFormData]="offerDetailsById()" ></app-offer-form>
+}
+   <p-toast />
+   <p-confirmdialog />

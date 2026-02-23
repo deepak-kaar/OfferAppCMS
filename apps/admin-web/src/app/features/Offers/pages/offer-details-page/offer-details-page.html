@@ -1,0 +1,297 @@
+
+  <div class="w-full flex flex-col md:flex-row justify-between items-center mb-5">
+
+  <!-- Left Section -->
+  <div class="flex flex-row gap-3 items-center mb-5 md:mb-0">
+    <i class="pi pi-arrow-left text-sm text-[#45556C] cursor-pointer" (click)="back()"></i>
+    <p class="text-[#45556C] text-md font-normal" (click)="back()">Cancel</p>
+  </div>
+
+  <!-- Right Section -->
+  <div class="flex flex-row gap-3  mb-5 md:mb-0">
+   
+    <button pButton type="submit" label="Edit" class="p-button-primary" (click)="navigateToEditOffer()"></button>
+  </div>
+</div>
+
+  <div class=" bg-slate-50 min-h-screen w-full">
+  <div class="bg-white rounded-3xl shadow-xl p-6 w-full border border-slate-100">
+
+    
+    <div class="flex flex-col lg:flex-row gap-8">
+      <div class="w-full lg:w-1/3">
+        <img 
+          src="assets/burger.jpg" 
+          alt="Burger Flash Sale" 
+          class="rounded-3xl w-full h-64 object-cover shadow-sm"
+        />
+      </div>
+
+      <div class="w-full lg:w-2/3">
+        <div class="flex gap-2 mb-3">
+          <p-chip label="ACTIVE" class="bg-green-100 text-green-700 font-bold text-xs px-2" />
+          <p-chip label="FOOD & DINING" class="bg-blue-100 text-blue-700 font-bold text-xs px-2" />
+        </div>
+
+        <h1 class="text-1xl font-black text-slate-800 mb-2">{{this.OfferBasicData().title}}</h1>
+        <div class="flex items-center gap-6 text-slate-500 text-sm mb-4">
+          <span class="flex items-center gap-2">
+            <i class="pi pi-shopping-bag"></i> Burger King
+          </span>
+          <span class="flex items-center gap-2">
+            <i class="pi pi-calendar"></i> Added {{this.OfferBasicData().startDate.$date | date:'yyyy-MM-dd'}}
+          </span>
+        </div>
+
+        <p class="text-slate-600 leading-relaxed mb-8">
+          {{this.OfferBasicData().description}}
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex items-center gap-4 bg-teal-50/50 p-4 rounded-2xl border border-teal-100">
+            <div class="bg-teal-100 p-3 rounded-xl">
+               <i class="pi pi-sync text-teal-600 font-bold"></i>
+            </div>
+            <div>
+              <p class="text-[10px] text-teal-700 uppercase font-bold tracking-wider">Redeemed</p>
+              <p class="text-xl font-bold text-slate-800">1,245</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100">
+            <div class="bg-indigo-100 p-3 rounded-xl">
+               <i class="pi pi-heart text-indigo-600 font-bold"></i>
+            </div>
+            <div>
+              <p class="text-[10px] text-indigo-700 uppercase font-bold tracking-wider">Saves</p>
+              <p class="text-xl font-bold text-slate-800">3,892</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-cyan-50/50 p-4 rounded-2xl border border-cyan-100">
+            <div class="bg-cyan-100 p-3 rounded-xl">
+               <i class="pi pi-share-alt text-cyan-600 font-bold"></i>
+            </div>
+            <div>
+              <p class="text-[10px] text-cyan-700 uppercase font-bold tracking-wider">Shares</p>
+              <p class="text-xl font-bold text-slate-800">567</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+      <div class="flex flex-col gap-6">
+        <div class="bg-purple-100/50 p-5 rounded-2xl flex items-center gap-4 border border-purple-200">
+           <div class="bg-purple-700 text-white font-bold w-14 h-14 flex items-center justify-center rounded-xl text-lg shadow-lg">
+             30%
+           </div>
+           <div>
+             <p class="text-xs text-purple-800 font-medium">Discount</p>
+             <p class="text-lg font-bold text-slate-800">{{this.OfferBasicData().description}} OFF</p>
+           </div>
+        </div>
+        
+        <div class="flex items-center gap-4 px-2">
+           <i class="pi pi-calendar-plus text-green-600 text-2xl"></i>
+           <div>
+             <p class="text-xs text-slate-400 font-medium">Start Date</p>
+             <p class="text-lg font-bold text-slate-800">{{this.OfferBasicData().startDate.$date |  date:'yyyy-MM-dd'}}</p>
+           </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <div class="flex items-center gap-4 px-2 mt-4 lg:mt-0">
+           <i class="pi pi-calendar-times text-red-500 text-2xl"></i>
+           <div>
+             <p class="text-xs text-slate-400 font-medium">End Date</p>
+             <p class="text-lg font-bold text-slate-800">{{this.OfferBasicData().expiryDate.$date | date:'yyyy-MM-dd'}}</p>
+           </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <p-button label="Food" [outlined]="true" severity="secondary" styleClass="rounded-full text-xs py-1 px-4" />
+          <p-button label="Limited" [outlined]="true" severity="secondary" styleClass="rounded-full text-xs py-1 px-4" />
+          <p-button label="Flash Sale" [outlined]="true" severity="secondary" styleClass="rounded-full text-xs py-1 px-4" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-8 grid grid-cols-1 md:grid-cols-2 w-full gap-6">
+  
+  <div class="bg-white rounded-[2rem] shadow-sm border border-slate-200/60 p-8 w-full">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <h3 class="text-xl font-bold text-slate-800">Redemption & Locations</h3>
+      
+      <div class="flex gap-1 bg-slate-50 p-1 rounded-xl">
+        <p-chip label="Physical" styleClass="bg-indigo-100 text-indigo-700 text-[10px] font-bold border-none" />
+        <p-chip label="In-Store" styleClass="bg-transparent text-slate-400 text-[10px] font-bold border-none" />
+        <p-chip label="Online Link" styleClass="bg-transparent text-slate-400 text-[10px] font-bold border-none" />
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="flex items-center justify-between p-4 bg-slate-50/50 rounded-2xl border border-slate-100/50">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
+            <i class="pi pi-map-marker text-xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">Riyadh Park Mall</h4>
+            <p class="text-xs text-slate-400">Northern Ring Branch</p>
+          </div>
+        </div>
+        <p-chip label="2.5 km" styleClass="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-3" />
+      </div>
+
+      <div class="flex items-center justify-between p-4 bg-slate-50/50 rounded-2xl border border-slate-100/50">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700">
+            <i class="pi pi-map-marker text-xl"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-sm">Olaya Street</h4>
+            <p class="text-xs text-slate-400">Downtown District</p>
+          </div>
+        </div>
+        <p-chip label="1.8 km" styleClass="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-3" />
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-[2rem] shadow-sm border border-slate-200/60 p-8 flex flex-col w-full">
+    <h3 class="text-xl font-bold text-slate-800 mb-8">How to Redeem</h3>
+    
+    <div class="flex-grow flex items-start p-6 bg-slate-50/50 rounded-2xl border border-slate-100/50 border-dashed">
+      <p class="text-slate-500 text-sm leading-relaxed">
+        Present this coupon code to the cashier before ordering
+      </p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- 
+{
+    "_id": {
+        "$oid": "79m9fHdQdWiNlz30crmV"
+    },
+    "category": {
+        "_id": {
+            "$oid": "rV4ziAG0KEN3gvPxIdSb"
+        },
+        "icon": "https://storage.googleapis.com/offerapp-bucket/categories/icons/1771324275281-CategoryCard.svg",
+        "image": "",
+        "name": "Airlines",
+        "name_ar": "الخطوط الجوية",
+        "order": "1",
+        "createdAt": {
+            "$date": "2026-02-17T10:31:15.209Z"
+        },
+        "updatedAt": {
+            "$date": "2026-02-17T10:31:15.209Z"
+        }
+    },
+    "title": "test",
+    "title_ar": "test",
+    "description": "",
+    "description_ar": "",
+    "highlights": "",
+    "highlights_ar": "",
+    "howToAvail": "test",
+    "howToAvail_ar": "test",
+    "discount_url": "",
+    "startDate": {
+        "$date": "2026-02-19T21:00:00.000Z"
+    },
+    "expiryDate": {
+        "$date": "2026-02-18T21:00:00.000Z"
+    },
+    "image": "",
+    "featuredImage": "",
+    "isActive": true,
+    "isFeatured": false,
+    "isPartnerHotel": false,
+    "hotelStarRating": false,
+    "hotelAmenitites": [],
+    "rooms": null,
+    "currency": "",
+    "currency_ar": null,
+    "taxValue": "",
+    "taxValue_ar": "",
+    "website": "",
+    "email": [],
+    "mobile": [],
+    "telephone": [],
+    "contacts": [],
+    "enableMapSearch": true,
+    "searchKeywords": [],
+    "tags": [],
+    "createdByRole": "Personnel",
+    "createdAt": {
+        "$date": "2026-02-18T10:11:14.215Z"
+    },
+    "vendor": {
+        "_id": {
+            "$oid": "FeAoioZ2Uy7Lz9iMPTwF"
+        },
+        "name": "Vida Hotel & Resort V3",
+        "logo": {
+            "objectURL": {
+                "changingThisBreaksApplicationSecurity": "blob:http://localhost:4200/890c64be-d966-47d4-bc38-edc41b788bb1"
+            }
+        },
+        "website": [
+            "https://instagram.com/vidahotels"
+        ],
+        "description": "Luxury hotel and resort in downtown",
+        "smeEmail": "john.doe@vidahotels.com",
+        "smeName": "John Doe",
+        "smePhone": "972983798123",
+        "email": [
+            "info@vidahotels.com"
+        ],
+        "mobile": [
+            "92398918239"
+        ],
+        "telephone": [],
+        "locations": [
+            {
+                "branchName": null,
+                "address": null,
+                "googleMapLink": null
+            }
+        ],
+        "offers": [
+            "offer123",
+            "offer456",
+            "YB9uIXlvLSLXXp2AD0cI",
+            "o4p2UatKsCcOnr4fLD00",
+            "79m9fHdQdWiNlz30crmV"
+        ],
+        "searchKeywords": [],
+        "isActive": true,
+        "createdAt": {
+            "$date": "2026-02-14T15:00:44.577Z"
+        },
+        "updatedAt": {
+            "$date": "2026-02-18T08:11:17.044Z"
+        },
+        "__v": 6
+    },
+    "locations": [],
+    "offerType": "regular",
+    "discountType": "fixed",
+    "isOccasional": false,
+    "discountCode": "98",
+    "__v": 4,
+    "updatedAt": {
+        "$date": "2026-02-18T11:35:42.000Z"
+    }
+} -->

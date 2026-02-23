@@ -1,0 +1,388 @@
+
+@if(isLoading){
+<!-- VENDOR INFORMATION SKELETON -->
+<div class="p-6 bg-white rounded-xl shadow-sm space-y-6 animate-pulse">
+
+  <div class="h-6 w-48 bg-gray-300 rounded"></div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Input skeleton -->
+    @for (i of [1,2,3,4,5]; track i) {
+      <div>
+        <div class="h-4 w-40 bg-gray-300 rounded mb-2"></div>
+        <div class="h-10 w-full bg-gray-200 rounded"></div>
+      </div>
+    }
+
+    <!-- Links -->
+    <div class="row-span-2">
+      <div class="h-4 w-40 bg-gray-300 rounded mb-2"></div>
+
+      <div class="flex gap-3">
+        <div class="h-10 flex-1 bg-gray-200 rounded"></div>
+        <div class="h-10 w-10 bg-gray-300 rounded"></div>
+      </div>
+
+      <div class="flex gap-2 mt-3">
+        <div class="h-6 w-20 bg-gray-300 rounded-full"></div>
+        <div class="h-6 w-20 bg-gray-300 rounded-full"></div>
+      </div>
+    </div>
+
+    <!-- Logo Upload -->
+    <div class="md:col-span-2">
+      <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 bg-gray-50 text-center">
+        <div class="h-10 w-10 bg-gray-300 rounded-full mx-auto mb-3"></div>
+        <div class="h-4 w-48 bg-gray-300 rounded mx-auto mb-2"></div>
+        <div class="h-3 w-32 bg-gray-300 rounded mx-auto"></div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="md:col-span-2">
+      <div class="h-4 w-40 bg-gray-300 rounded mb-2"></div>
+      <div class="h-24 w-full bg-gray-200 rounded"></div>
+    </div>
+
+    <!-- Description Arabic -->
+    <div class="md:col-span-2">
+      <div class="h-4 w-40 bg-gray-300 rounded mb-2"></div>
+      <div class="h-24 w-full bg-gray-200 rounded"></div>
+    </div>
+
+  </div>
+</div>
+<!-- LOCATION SECTION SKELETON -->
+<div class="p-6 bg-white rounded-xl shadow-sm space-y-6 animate-pulse">
+
+  <div class="flex justify-between items-center">
+    <div class="h-6 w-48 bg-gray-300 rounded"></div>
+    <div class="h-10 w-32 bg-gray-300 rounded"></div>
+  </div>
+
+  @for (i of [1,2]; track i) {
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-lg bg-gray-50">
+
+      <div>
+        <div class="h-4 w-32 bg-gray-300 rounded mb-2"></div>
+        <div class="h-10 w-full bg-gray-200 rounded"></div>
+      </div>
+
+      <div>
+        <div class="h-4 w-32 bg-gray-300 rounded mb-2"></div>
+        <div class="h-10 w-full bg-gray-200 rounded"></div>
+      </div>
+
+      <div class="md:col-span-2">
+        <div class="h-4 w-32 bg-gray-300 rounded mb-2"></div>
+        <div class="h-24 w-full bg-gray-200 rounded"></div>
+      </div>
+
+    </div>
+  }
+</div>
+
+<!-- REPRESENTATIVE INFO SKELETON -->
+<div class="p-6 bg-white rounded-xl shadow-sm space-y-6 animate-pulse">
+
+  <div class="h-6 w-64 bg-gray-300 rounded"></div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    @for (i of [1,2,3]; track i) {
+      <div>
+        <div class="h-4 w-32 bg-gray-300 rounded mb-2"></div>
+        <div class="h-10 w-full bg-gray-200 rounded"></div>
+      </div>
+    }
+
+  </div>
+</div>
+
+}
+@else{
+ <form [formGroup]="vendorForm" (ngSubmit)="submitForm()">
+
+  <!-- SECTION WRAPPER -->
+  <div class="p-6 bg-white rounded-xl shadow-sm space-y-6">
+    <!-- SECTION TITLE -->
+    <h2 class="text-2xl font-medium">Vendor's Information</h2>
+    <!-- RESPONSIVE GRID -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- English Name -->
+      <div>
+        <label class="text-sm font-medium">Full Name in English</label>
+        <div class="relative">
+          <i class="pi pi-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText formControlName="nameEn" class="pl-10 w-full bg-gray-50"
+            placeholder="eg..Global Tech Solutions" />
+        </div>
+      </div>
+      <!-- Arabic Name -->
+      <div>
+        <label class="text-sm font-medium">Full Name in Arabic</label>
+        <div class="relative">
+          <i class="pi pi-user absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText formControlName="nameAr" class="w-full text-right pr-10 bg-gray-50" />
+        </div>
+      </div>
+      <!-- CR Number -->
+      <div>
+        <label class="text-sm font-medium">Commercial Registration Number</label>
+        <div class="relative">
+          <i class="pi pi-id-card absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText formControlName="crNumber" class="pl-10 w-full bg-gray-50" />
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <label class="text-sm font-medium">Contact Number</label>
+        <div class="relative">
+          <i class="pi pi-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText formControlName="contact" class="pl-10 w-full bg-gray-50" inputmode="numeric"
+            pattern="[0-9]*" />
+        </div>
+      </div>
+      <!-- Email -->
+      <div>
+        <label class="text-sm font-medium">Contact Email</label>
+        <div class="relative">
+          <i class="pi pi-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText formControlName="email" class="pl-10 w-full bg-gray-50" />
+        </div>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <app-category-dropdown
+            [label]="'Categories'"
+            [placeholder]="'Select categories'"
+            [multiple]="true"
+            [required]="false"
+            [control]="categories">
+        </app-category-dropdown>
+      </div>
+
+      <!-- Links (FormArray later) -->
+      <!-- class="md:col-span-2" -->
+      <div class="row-span-2 md:col-span-2">
+        <label class="text-sm font-medium">Links</label>
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <i class="pi pi-link absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input formControlName="linkinput" pInputText class="pl-10 w-full bg-gray-50"
+              placeholder="Add Website / Social Media Link" />
+          </div>
+          <p-button icon="pi pi-plus" (click)="addLink()"></p-button>
+        </div>
+        <div formArrayName="links" class="pt-2 flex gap-3">
+          @for(item of links.controls;track item){
+          <p-chip [label]="item.value" [removable]="true" />
+          }
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="md:col-span-2">
+        <label class="text-sm font-medium">Description</label>
+        <textarea pInputTextarea formControlName="descriptionEn" rows="4" class="w-full bg-gray-50"></textarea>
+      </div>
+
+      <div class="md:col-span-2">
+        <label class="text-sm font-medium">Description in Arabic</label>
+        <textarea pInputTextarea formControlName="descriptionAr" rows="4" class="w-full bg-gray-50"></textarea>
+      </div>
+
+      <!-- Logo Upload -->
+      <div class="md:col-span-2">
+        <div
+          class="border-2 border-dashed border-gray-300 rounded-xl p-8 bg-gray-50 text-center cursor-pointer"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+          (drop)="onDrop($event)"
+          [class.border-blue-400]="isDragging">
+      
+          <!-- Preview: new upload (object URL) -->
+          @if (logoPreviewUrl(); as preview) {
+            <div class="flex flex-col items-center gap-3">
+              <img [src]="preview" alt="Logo preview" class="max-h-40 w-auto object-contain rounded-lg shadow-sm" />
+              <p class="text-gray-500 text-sm">{{ selectedFile()?.name }}</p>
+              <div class="flex gap-2">
+                <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                  (click)="fileInput.click(); $event.stopPropagation()"></button>
+                <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                  (click)="removeLogo(); $event.stopPropagation()"></button>
+              </div>
+            </div>
+          }
+          <!-- Existing logo (edit mode): URL string -->
+          @else if (vendorForm.get('logo')?.value && typeof vendorForm.get('logo')?.value === 'string') {
+            <div class="flex flex-col items-center gap-3">
+              <img [src]="vendorForm.get('logo')?.value" alt="Vendor logo" class="max-h-40 w-auto object-contain rounded-lg shadow-sm"
+                (error)="$any($event.target).style.display='none'" />
+              <p class="text-gray-500 text-sm">Current logo</p>
+              <div class="flex gap-2">
+                <button type="button" pButton icon="pi pi-upload" label="Change" class="p-button-outlined p-button-sm"
+                  (click)="fileInput.click(); $event.stopPropagation()"></button>
+                <button type="button" pButton icon="pi pi-trash" label="Remove" class="p-button-outlined p-button-danger p-button-sm"
+                  (click)="removeLogo(); $event.stopPropagation()"></button>
+              </div>
+            </div>
+          }
+          @else {
+            <div class="flex flex-col items-center gap-3" (click)="fileInput.click()">
+              <i class="pi pi-upload text-4xl text-gray-400"></i>
+              <p class="text-gray-600 font-medium">Upload a file or drag and drop</p>
+              <p class="text-gray-400 text-sm">PNG, JPG, GIF up to 10MB</p>
+            </div>
+          }
+      
+          <input #fileInput type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br>
+  <!-- LOCATION SECTION -->
+  <div class="p-6 bg-white rounded-xl shadow-sm space-y-6">
+
+    <div class="flex flex-row justify-between items-center">
+      <h2 class="text-2xl font-medium">Location Information</h2>
+
+      <button pButton type="button" (click)="addLocation()">
+        <i class="pi pi-plus" pButtonIcon></i>
+        <span pButtonLabel>Add Location</span>
+      </button>
+    </div>
+
+    <!-- FormArray wrapper -->
+    <div formArrayName="locations">
+
+      @for (loc of locations.controls; let i = $index; track i) {
+
+      <!-- Each location group -->
+      <div [formGroupName]="i" class="grid grid-cols-1 md:grid-cols-2 gap-6  p-4 rounded-lg  relative">
+
+        <!-- Remove button -->
+        @if(i !== 0){
+        <button type="button" class="absolute top-1 right-6 p-button-danger p-button-sm" pButton icon="pi pi-trash"
+          (click)="removeLocation(i)">
+        </button>
+        }
+
+        <!-- Branch Name -->
+        <div class="p-float-label">
+          <label class="text-sm font-medium">Branch Name</label>
+          <div class="relative">
+            <i class="pi pi-building absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input pInputText formControlName="branchName" class="w-full pl-10 bg-gray-50" placeholder="e.g. Main Branch" />
+          </div>
+        </div>
+
+        <!-- Branch Name in Arabic -->
+        <div class="p-float-label">
+          <label class="text-sm font-medium">Branch Name in Arabic</label>
+          <div class="relative">
+            <i class="pi pi-building absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input pInputText formControlName="branchNameAr" class="w-full pl-10 bg-gray-50 text-right" placeholder="e.g. الفرع الرئيسي" />
+          </div>
+        </div>
+
+        <!-- City -->
+        <div class="p-float-label">
+          <label class="text-sm font-medium">City</label>
+          <div class="relative">
+            <i class="pi pi-map-marker absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input pInputText formControlName="city" class="w-full pl-10 bg-gray-50" placeholder="e.g. Manama" />
+          </div>
+        </div>
+
+        <!-- Google Map Link -->
+        <div class="p-float-label">
+          <label class="text-sm font-medium">Google Map Link</label>
+          <div class="relative flex items-center gap-2">
+            <i class="pi pi-map absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input
+              pInputText
+              formControlName="googleMapLink"
+              class="w-full pl-10 pr-10 bg-gray-50"
+              [class.ng-invalid]="loc.get('googleMapLink')?.invalid && loc.get('googleMapLink')?.touched"
+              [class.border-red-500]="loc.get('googleMapLink')?.errors?.['invalidMapLink']"
+              placeholder="Paste Google Maps link"
+            />
+            @if (loc.get('googleMapLink')?.value && loc.get('latitude')?.value != null && loc.get('longitude')?.value != null && !loc.get('googleMapLink')?.errors?.['invalidMapLink']) {
+              <i class="pi pi-check-circle text-green-600 text-xl absolute right-3" title="Valid link"></i>
+            }
+          </div>
+          @if (loc.get('googleMapLink')?.errors?.['invalidMapLink'] && loc.get('googleMapLink')?.value) {
+            <span class="text-sm text-red-600 mt-1 block">Invalid link</span>
+          }
+          @if (loc.get('latitude')?.value != null && loc.get('longitude')?.value != null && !loc.get('googleMapLink')?.errors?.['invalidMapLink']) {
+            <div class="text-sm text-gray-500 mt-1">
+              <span>Latitude: {{ loc.get('latitude')?.value }}</span>
+              <span class="ml-4">Longitude: {{ loc.get('longitude')?.value }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Address -->
+        <div class="md:col-span-2 p-float-label">
+          <label class="text-sm font-medium">Address</label>
+          <textarea pInputTextarea formControlName="address" rows="4" class="w-full bg-gray-50"></textarea>
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+  </div>
+  <br>
+
+  <div class="p-6 bg-white rounded-xl shadow-sm space-y-6">
+    <div class="col-span-2 h-5xl bg-red">
+      <h2 class="text-2xl font-medium">Representative Information</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- CR Number -->
+      <div class="p-float-label">
+        <label for="cr" class="text-sm font-medium">Fullname</label>
+        <div class="relative">
+          <i class="pi pi-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText id="cr" formControlName="repFullName" class="w-full pl-10 bg-gray-50" />
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="p-float-label">
+        <label for="contact" class="text-sm font-medium" class="text-sm font-medium">Contact Number</label>
+        <div class="relative">
+          <i class="pi pi-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText id="contact" formControlName="repContactNumber" class="w-full pl-10 bg-gray-50"
+            inputmode="numeric" pattern="[0-9]*" />
+        </div>
+      </div>
+
+      <!-- email -->
+      <div class="p-float-label md:col-span-2">
+        <label for="contact" class="text-sm font-medium" class="text-sm font-medium">email</label>
+        <div class="relative">
+          <i class="pi pi-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          <input pInputText id="contact" formControlName="repEmail" class="w-full pl-10 bg-gray-50" />
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-span-1 md:col-span-2 flex justify-end gap-3 mt-4">
+    <button pButton type="button" label="Back to Vendors" class="p-button-outlined"></button>
+    <button pButton type="submit" [label]="buttonName" class="p-button-primary"></button>
+  </div>
+
+</form>
+}

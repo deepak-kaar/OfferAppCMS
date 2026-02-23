@@ -1,0 +1,51 @@
+{
+    "_id": {
+      "$oid": "61ed33fa344f9623f1d368ee"
+    },
+    "__v": 2,
+    "createdAt": {
+      "$date": "2022-01-23T10:54:50.630Z"
+    },
+    "crn_no": "1234567890",
+    "description": "",
+    "description_ar": "",
+    "email": [],
+    "isActive": true,
+    "links": ["https://www.vidahotels.com/en/resorts/vida-beach-resort-marassi-al-bahrain/", "https://www.facebook.com/vidahotels/"],
+    "locations": [
+      {
+        "updatedAt": {
+          "$date": "2023-01-05T09:57:52.461Z"
+        },
+        "city_ar": "المحرق",
+        "country_ar": "البحرين",
+        "country": "Bahrain",
+        "createdAt": {
+          "$date": "2022-09-08T10:10:14.101Z"
+        },
+        "__id__": {
+          "$oid": "6319bf98d7f86c6b1d40fd18"
+        },
+        "longitude": null,
+        "city": "Al Muharraq",
+        "latitude": null,
+        "__v": 0
+      }
+    ],
+    "logo": "https://offers.sapublichosting.com/api/images/image-1642935287589.png",
+    "mobile": [],
+    "name": "Vida Marassi Al Bahrain",
+    "name_ar": "",
+    "offers": [
+      "61ed389b344f9623f1d369bb"
+    ],
+    "searchKeywords": [],
+    "smeEmail": "",
+    "smeName": "",
+    "smePhone": "",
+    "telephone": [],
+    "updatedAt": {
+      "$date": "2023-01-05T09:57:52.462Z"
+    },
+    "website": "https://www.vidahotels.com/en/resorts/vida-beach-resort-marassi-al-bahrain/"
+  }

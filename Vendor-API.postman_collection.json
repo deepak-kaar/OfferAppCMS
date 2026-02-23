@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "vendor-api-collection",
+		"name": "Vendor API Collection",
+		"description": "Complete API collection for Vendor management endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Vendor CRUD",
+			"item": [
+				{
+					"name": "Create Vendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vida Hotel\",\n  \"name_ar\": \"فندق فيدا\",\n  \"description\": \"Luxury hotel in downtown\",\n  \"description_ar\": \"فندق فاخر في وسط المدينة\",\n  \"logo\": \"https://example.com/logo.png\",\n  \"website\": \"https://vidahotels.com\",\n  \"crn_no\": \"CRN123456\",\n  \"email\": [\"info@vidahotels.com\", \"reservations@vidahotels.com\"],\n  \"mobile\": [\"+97312345678\"],\n  \"telephone\": [\"+97317654321\"],\n  \"links\": [\"https://instagram.com/vidahotels\"],\n  \"searchKeywords\": [\"hotel\", \"luxury\", \"vida\", \"accommodation\"],\n  \"smeName\": \"John Doe\",\n  \"smeEmail\": \"john.doe@vidahotels.com\",\n  \"smePhone\": \"+97312345678\",\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vendor",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor"
+							]
+						},
+						"description": "Create a new vendor with all details"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Vendors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor"
+							]
+						},
+						"description": "Get all vendors without filters"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Active Vendors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor?isActive=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor"
+							],
+							"query": [
+								{
+									"key": "isActive",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Get all active vendors only"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vendors by Country",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor?country=Bahrain",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor"
+							],
+							"query": [
+								{
+									"key": "country",
+									"value": "Bahrain"
+								}
+							]
+						},
+						"description": "Get vendors filtered by country"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vendor by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Get a single vendor by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vendor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vida Hotel & Resort\",\n  \"description\": \"Luxury hotel and resort in downtown\",\n  \"website\": \"https://vidahotelsandresorts.com\",\n  \"mobile\": [\"+97312345678\", \"+97399887766\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vendor/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Update vendor details"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vendor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Permanently delete a vendor (hard delete)"
+					},
+					"response": []
+				}
+			],
+			"description": "Basic CRUD operations for vendors"
+		},
+		{
+			"name": "Vendor Search & Filter",
+			"item": [
+				{
+					"name": "Search Vendors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/search?searchTerm=vida",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								"search"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "vida"
+								}
+							]
+						},
+						"description": "Search vendors by name (English/Arabic) or keywords"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vendors by Offer ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/offer/:offerId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								"offer",
+								":offerId"
+							],
+							"variable": [
+								{
+									"key": "offerId",
+									"value": "offer_id_here"
+								}
+							]
+						},
+						"description": "Get all vendors that have a specific offer"
+					},
+					"response": []
+				}
+			],
+			"description": "Search and filter operations"
+		},
+		{
+			"name": "Vendor Status",
+			"item": [
+				{
+					"name": "Deactivate Vendor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:id/deactivate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":id",
+								"deactivate"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Deactivate a vendor (soft delete)"
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Vendor",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:id/activate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":id",
+								"activate"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Activate a vendor"
+					},
+					"response": []
+				}
+			],
+			"description": "Vendor activation/deactivation operations"
+		},
+		{
+			"name": "Vendor Offers",
+			"item": [
+				{
+					"name": "Add Offer to Vendor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:vendorId/offer/:offerId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":vendorId",
+								"offer",
+								":offerId"
+							],
+							"variable": [
+								{
+									"key": "vendorId",
+									"value": "vendor_id_here"
+								},
+								{
+									"key": "offerId",
+									"value": "offer_id_here"
+								}
+							]
+						},
+						"description": "Add an offer to a vendor"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Offer from Vendor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:vendorId/offer/:offerId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":vendorId",
+								"offer",
+								":offerId"
+							],
+							"variable": [
+								{
+									"key": "vendorId",
+									"value": "vendor_id_here"
+								},
+								{
+									"key": "offerId",
+									"value": "offer_id_here"
+								}
+							]
+						},
+						"description": "Remove an offer from a vendor"
+					},
+					"response": []
+				}
+			],
+			"description": "Manage vendor offers"
+		},
+		{
+			"name": "Vendor Locations",
+			"item": [
+				{
+					"name": "Add Location to Vendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"city\": \"Manama\",\n  \"city_ar\": \"المنامة\",\n  \"country\": \"Bahrain\",\n  \"country_ar\": \"البحرين\",\n  \"latitude\": 26.2285,\n  \"longitude\": 50.5860\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vendor/:vendorId/location",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":vendorId",
+								"location"
+							],
+							"variable": [
+								{
+									"key": "vendorId",
+									"value": "vendor_id_here"
+								}
+							]
+						},
+						"description": "Add a new location to a vendor"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vendor Location",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"city\": \"Riffa\",\n  \"city_ar\": \"الرفاع\",\n  \"latitude\": 26.1299,\n  \"longitude\": 50.5550\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vendor/:vendorId/location/:locationId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":vendorId",
+								"location",
+								":locationId"
+							],
+							"variable": [
+								{
+									"key": "vendorId",
+									"value": "vendor_id_here"
+								},
+								{
+									"key": "locationId",
+									"value": "location_id_here"
+								}
+							]
+						},
+						"description": "Update a specific location for a vendor"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Location from Vendor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vendor/:vendorId/location/:locationId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								":vendorId",
+								"location",
+								":locationId"
+							],
+							"variable": [
+								{
+									"key": "vendorId",
+									"value": "vendor_id_here"
+								},
+								{
+									"key": "locationId",
+									"value": "location_id_here"
+								}
+							]
+						},
+						"description": "Remove a location from a vendor"
+					},
+					"response": []
+				}
+			],
+			"description": "Manage vendor locations"
+		},
+		{
+			"name": "Bulk Operations",
+			"item": [
+				{
+					"name": "Bulk Update Vendors",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"id\": \"vendor_id_1\",\n    \"data\": {\n      \"isActive\": false,\n      \"description\": \"Updated description 1\"\n    }\n  },\n  {\n    \"id\": \"vendor_id_2\",\n    \"data\": {\n      \"isActive\": true,\n      \"searchKeywords\": [\"hotel\", \"luxury\", \"resort\"]\n    }\n  }\n]"
+						},
+						"url": {
+							"raw": "{{base_url}}/vendor/bulk",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vendor",
+								"bulk"
+							]
+						},
+						"description": "Update multiple vendors at once"
+					},
+					"response": []
+				}
+			],
+			"description": "Bulk operations on vendors"
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}
