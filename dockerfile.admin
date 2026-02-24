@@ -10,7 +10,7 @@ COPY tsconfig.base.json ./
 COPY apps ./apps
 COPY libs ./libs
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Build Angular app
 RUN npx nx build admin-web --configuration=production

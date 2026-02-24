@@ -12,7 +12,7 @@ COPY tsconfig.base.json ./
 COPY apps ./apps
 COPY libs ./libs
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Build only api
 RUN npx nx build api
@@ -23,7 +23,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --legacy-peer-deps --only=production
 
 # Copy built files
 COPY --from=builder /app/dist/apps/api ./dist
