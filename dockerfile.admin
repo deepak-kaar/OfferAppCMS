@@ -1,0 +1,25 @@
+# ---------- Stage 1: Build Angular ----------
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY nx.json ./
+COPY tsconfig.base.json ./
+
+COPY apps ./apps
+COPY libs ./libs
+
+RUN npm install
+
+# Build Angular app
+RUN npx nx build admin-web --configuration=production
+
+# ---------- Stage 2: Nginx ----------
+FROM nginx:alpine
+
+COPY --from=builder /app/dist/apps/admin-web /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
