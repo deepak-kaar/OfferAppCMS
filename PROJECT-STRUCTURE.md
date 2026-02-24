@@ -75,7 +75,7 @@ apps/api/
             └── firebase.module.ts
 ```
 
-- **admin** — Admin module and controller.
+- **admin** — Admin module and controller. 
 - **vendor** — Vendor module with controller, DTOs, and service.
 - **shared** — API-level config, interfaces, and shared modules (e.g. Firebase).
 
