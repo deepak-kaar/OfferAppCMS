@@ -26,8 +26,8 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps --only=production
 
 # Copy built files
-COPY --from=builder /app/dist/apps/api ./dist
+COPY --from=builder /app/dist/ ./dist
 
 EXPOSE 3000
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/apps/api/src/main.js"]
